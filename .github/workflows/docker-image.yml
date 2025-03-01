@@ -24,6 +24,7 @@ jobs:
           docker push ghcr.io/${{ github.repository }}/moronmon/testing/welcome:${{ github.event.inputs.release_tag }}
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
     - name: Deploy to VM
       uses: appleboy/scp-action@v0.1.0
