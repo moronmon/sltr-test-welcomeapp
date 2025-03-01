@@ -20,3 +20,5 @@ jobs:
       run: docker push ttl.sh/morownmon_phyton:10m
     - name: Validate tag release
       run: echo ${{ github.event.inputs.release_tag }}
+    - name: Validate the event tag release
+      run: echo ${{ github.event.inputs.release_tag }}
