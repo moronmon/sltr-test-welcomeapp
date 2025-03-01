@@ -8,7 +8,7 @@ on:
       release_tag:
         description: 'Versioning the Docker Image'
         required: true
-        default: 'latest'
+        # default: 'latest'
 jobs:
   build:
     runs-on: ubuntu-latest
