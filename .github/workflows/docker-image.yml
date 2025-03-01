@@ -1,8 +1,14 @@
 name: DockerBuild_Image
 
 on:
-  push:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Versioning the Docker Image'
+        required: true
+        default: 'latest'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,3 +16,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build . -f 2.Container-Docker/Dockerfile -t ttl.sh/morownmon_phyton:10m
+    - name: Push to registry
+      run: docker push ttl.sh/morownmon_phyton:10m
+    - name: Validate tag release
+      run: echo ${{ github.event.inputs.release_tag }}
