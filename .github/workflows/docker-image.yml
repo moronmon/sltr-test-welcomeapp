@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . -f 2.Container-Docker/Dockerfile -t ttl.sh/morownmon_phyton:10m
-    - name: Push to registry
-      run: docker push ttl.sh/morownmon_phyton:10m
-    - name: Validate tag release
-      run: echo ${{ github.event.inputs.release_tag }}
-    - name: Validate the event tag release
-      run: echo ${{ github.event.inputs.release_tag }}
+    - name: Login to Registry
+      run: docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+    - name: Build the Image
+      run: docker build -t ghcr.io/${{ github.repository }}/moronmon/testing/welcome:latest -t ghcr.io/${{ github.repository }}/moronmon/testing/welcome:${{ github.event.inputs.release_tag }} .
+    - name: Push to Registry
+      run: |
+          docker push ghcr.io/${{ github.repository }}/moronmon/testing/welcome:latest
+          docker push ghcr.io/${{ github.repository }}/moronmon/testing/welcome:${{ github.event.inputs.release_tag }}
