@@ -27,13 +27,5 @@ jobs:
     needs: build
     steps:
     - name: Deploy to VM
-      uses: appleboy/scp-action@v0.1.0
-      with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 2022
-          script: |
-            # Navigate to the directory containing your docker-compose.yml
-            docker-compose -f /home/userdeploy/2.Container-Docker/docker-compose.yaml pull
-            docker-compose -f /home/userdeploy/2.Container-Docker/docker-compose.yaml up -d
+      run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} -p ${{ secrets.VM_PORT  }} 'bash -s' < 3.CICD_GitHubActions/script-deploy.sh
+
