@@ -17,7 +17,7 @@ jobs:
     - name: Login to Registry
       run: docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
     - name: Build the Image
-      run: docker build -t ghcr.io/${{ github.repository }}/moronmon/testing/welcome:latest -t ghcr.io/${{ github.repository }}/moronmon/testing/welcome:${{ github.event.inputs.release_tag }} .
+      run: docker build -t ghcr.io/${{ github.repository }}/moronmon/testing/welcome:latest -t ghcr.io/${{ github.repository }}/moronmon/testing/welcome:${{ github.event.inputs.release_tag }} -f 2.Container-Docker/Dockerfile .
     - name: Push to Registry
       run: |
           docker push ghcr.io/${{ github.repository }}/moronmon/testing/welcome:latest
