@@ -27,5 +27,6 @@ jobs:
     needs: build
     steps:
     - name: Deploy to VM
-      run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} -p ${{ secrets.VM_PORT  }} 'bash -s' < 3.CICD_GitHubActions/script-deploy.sh
+      # run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} -p ${{ secrets.VM_PORT  }} 'bash -s' < 3.CICD_GitHubActions/script-deploy.sh
+      run: docker-compose --version
 
