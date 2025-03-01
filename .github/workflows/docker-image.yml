@@ -22,3 +22,17 @@ jobs:
       run: |
           docker push ghcr.io/${{ github.repository }}/moronmon/testing/welcome:latest
           docker push ghcr.io/${{ github.repository }}/moronmon/testing/welcome:${{ github.event.inputs.release_tag }}
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to VM
+      uses: appleboy/scp-action@v0.1.0
+      with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 2022
+          script: |
+            # Navigate to the directory containing your docker-compose.yml
+            docker-compose -f /home/userdeploy/2.Container-Docker/docker-compose.yaml pull
+            docker-compose -f /home/userdeploy/2.Container-Docker/docker-compose.yaml up -d
