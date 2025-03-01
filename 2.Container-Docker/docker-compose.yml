@@ -1,0 +1,9 @@
+services:
+  sltr_test:
+    container_name: welcome_simple_app
+    image: {welcome_app} #NEED TO CHANGE
+    # build:
+    #   context: ..
+    #   dockerfile: 2.Container-Docker/Dockerfile
+    ports:
+      - "8000:5000"
