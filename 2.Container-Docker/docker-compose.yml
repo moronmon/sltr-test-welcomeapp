@@ -1,7 +1,7 @@
 services:
   sltr_test:
     container_name: welcome_simple_app
-    image: {welcome_app} #NEED TO CHANGE
+    image: ghcr.io/moronmon/sltr-test-welcomeapp/moronmon/testing/welcome:latest
     # build:
     #   context: ..
     #   dockerfile: 2.Container-Docker/Dockerfile
