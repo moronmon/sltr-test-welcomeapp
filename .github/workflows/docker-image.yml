@@ -29,8 +29,5 @@ jobs:
     - uses: actions/checkout@v4
     - name: Deploy to VM
       # run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} -p ${{ secrets.VM_PORT  }} 'bash -s' < 3.CICD_GitHubActions/script-deploy.sh
-      run: |
-          ls -lah
-          pwd
-          # bash 3.CICD_GitHubActions/script-deploy.sh
+      run: bash 3.CICD_GitHubActions/script-deploy.sh
 
