@@ -26,4 +26,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Deploy to VM
-      run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} -p ${{ secrets.VM_PORT  }} 'bash -s' < 3.CICD_GitHubActions/script-deploy.sh
+      run: | 
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} 2.Container-Docker/docker-compose.yml ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:/home/${{ secrets.VM_USER }}/apps/docker-compose.yaml
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} -p ${{ secrets.VM_PORT  }} 'bash -s' < 3.CICD_GitHubActions/script-deploy.sh
